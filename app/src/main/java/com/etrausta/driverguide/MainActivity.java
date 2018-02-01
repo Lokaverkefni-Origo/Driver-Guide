@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == SIGN_IN_REQUEST_CODE) {
             if(resultCode ==RESULT_OK) {
                 Snackbar.make(activityMain, "Successfully signed in. Welcome!", Snackbar.LENGTH_SHORT).show();
+                displayChatMessage();
             }
             else {
                 Snackbar.make(activityMain, "Sign in failed, try again later", Snackbar.LENGTH_SHORT).show();
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activityMain = (RelativeLayout) findViewById(R.id.activityMain);
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             //load content
             displayChatMessage();
         }
-
 
     }
 

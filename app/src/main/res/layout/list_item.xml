@@ -14,7 +14,7 @@
         android:id="@+id/msgTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/msgUser"/>
+        android:layout_below="@+id/msgUser"/>
 
     <TextView
         android:layout_marginTop="5dp"
@@ -23,6 +23,6 @@
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/msgUser"
+        android:layout_below="@+id/msgTime"
  />
 </RelativeLayout>
