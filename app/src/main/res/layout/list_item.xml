@@ -5,21 +5,18 @@
 
     <TextView
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/msgUser"
         android:textStyle="normal|bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:layout_alignBottom="@+id/msgUser"
-        android:layout_alignParentEnd="true"
         android:id="@+id/msgTime"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/msgUser"/>
 
     <TextView
-        android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
         android:id="@+id/msgTxt"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"

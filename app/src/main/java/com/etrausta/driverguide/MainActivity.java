@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         activityMain = (RelativeLayout) findViewById(R.id.activityMain);
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,22 +94,26 @@ public class MainActivity extends AppCompatActivity {
             displayChatMessage();
         }
 
+
     }
 
     private void displayChatMessage() {
         ListView listOfMsg = (ListView) findViewById(R.id.listOfMsg);
-        adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class,R.layout.list_item, FirebaseDatabase.getInstance().getReference()) {
+        adapter = new FirebaseListAdapter<ChatMessage>(this,
+                ChatMessage.class,
+                R.layout.list_item,
+                FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 //get references to the views of list_item.xml
-                TextView msgTxt, msgUser, msgTime;
-                msgTxt = (TextView) findViewById(R.id.msgTxt);
-                msgUser = (TextView) findViewById(R.id.msgUser);
-                msgTime = (TextView) findViewById(R.id.msgTime);
+                TextView messageTxt = (TextView)v.findViewById(R.id.msgTxt);
+                TextView messageUser = (TextView)v.findViewById(R.id.msgUser);
+                TextView messageTime = (TextView)v.findViewById(R.id.msgTime);
 
-                msgTxt.setText(model.getMsgTxt());
-                msgUser.setText(model.getMsgUser());
-                msgTime.setText(android.text.format.DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMsgTime()));
+                messageTxt.setText(model.getMsgTxt());
+                messageUser.setText(model.getMsgUser());
+                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                        model.getMsgTime()));
             }
         };
         listOfMsg.setAdapter(adapter);
