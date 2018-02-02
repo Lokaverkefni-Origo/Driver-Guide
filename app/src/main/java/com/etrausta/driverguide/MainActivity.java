@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(inputEditText.getText().toString(),
                         FirebaseAuth.getInstance().getCurrentUser().getEmail()));
                 inputEditText.setText("");
+                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage("þetta er dummy",
+                        "Api Jónsson"));
             }
         });
 
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(activityMain,"Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(),Snackbar.LENGTH_SHORT).show();
             //load content
             displayChatMessage();
+            adapter.notifyDataSetChanged();
         }
 
     }
