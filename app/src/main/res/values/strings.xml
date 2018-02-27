@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Driver Guide</string>
     <string name="Feed">Feed</string>
-    <string name="Message">Message</string>
+    <string name="Chat">Chat</string>
     <string name="Search">Search</string>
+    <string name="Trips">Trips</string>
+    <string name="Alerts">Alerts</string>
+    <string name="More">More</string>
+    <string name="Message">Message</string>
+
 
 </resources>
