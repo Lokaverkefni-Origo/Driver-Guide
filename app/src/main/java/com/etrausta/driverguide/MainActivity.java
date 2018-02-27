@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                 selectedFragment = MainChat.newInstance();
                                 break;
                             case R.id.action_item3:
-                                //selectedFragment = ItemThreeFragment.newInstance();
+                                selectedFragment = MainSearch.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*private void displayChatMessage() {
+    /*public void displayChatMessage() {
         ListView listOfMsg = (ListView) findViewById(R.id.listOfMsg);
         adapter = new FirebaseListAdapter<ChatMessage>(this,
                 ChatMessage.class,

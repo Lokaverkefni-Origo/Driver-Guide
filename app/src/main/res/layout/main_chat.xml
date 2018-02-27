@@ -11,20 +11,6 @@
     tools:context="com.etrausta.driverguide.MainChat"
     tools:ignore="NamespaceTypo">
 
-    <ImageView
-        android:id="@+id/truiton_image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/truiton_image"
-        android:layout_centerHorizontal="true"
-        android:text="MainChat"
-        android:textSize="30sp"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -34,7 +20,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/message"
+            android:hint="@string/Message"
             android:id="@+id/inputEditText"
             />
 
