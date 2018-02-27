@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
+            android:src="@drawable/map" />
 
     </RelativeLayout>
 
