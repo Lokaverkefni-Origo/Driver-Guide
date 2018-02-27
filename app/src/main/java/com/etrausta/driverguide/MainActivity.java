@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -23,12 +24,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static int SIGN_IN_REQUEST_CODE = 1;
     private FirebaseListAdapter<ChatMessage> adapter;
-    RelativeLayout activityMain;
+    LinearLayout activityMain;
     FloatingActionButton fab;
 
     @Override
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == SIGN_IN_REQUEST_CODE) {
             if(resultCode ==RESULT_OK) {
                 Snackbar.make(activityMain, "Successfully signed in. Welcome!", Snackbar.LENGTH_SHORT).show();
-                displayChatMessage();
+                //displayChatMessage();
             }
             else {
                 Snackbar.make(activityMain, "Sign in failed, try again later", Snackbar.LENGTH_SHORT).show();
@@ -72,8 +77,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        activityMain = (RelativeLayout) findViewById(R.id.activityMain);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        activityMain = (LinearLayout) findViewById(R.id.activity_main);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                selectedFragment = MainHome.newInstance();
+                                break;
+                            case R.id.action_item2:
+                                selectedFragment = MainChat.newInstance();
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = MainSearch.newInstance();
+                                break;
+                        }
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
+                });
+
+        //Manually displaying the first fragment - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, MainHome.newInstance());
+        transaction.commit();
+        /*fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage("þetta er dummy",
                         "Api Jónsson"));
             }
-        });
+        });*/
 
         //check if not sign in then navigate signing page
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -93,13 +128,13 @@ public class MainActivity extends AppCompatActivity {
         else {
             Snackbar.make(activityMain,"Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(),Snackbar.LENGTH_SHORT).show();
             //load content
-            displayChatMessage();
-            adapter.notifyDataSetChanged();
+            /*displayChatMessage();
+            adapter.notifyDataSetChanged();*/
         }
 
     }
 
-    private void displayChatMessage() {
+    /*public void displayChatMessage() {
         ListView listOfMsg = (ListView) findViewById(R.id.listOfMsg);
         adapter = new FirebaseListAdapter<ChatMessage>(this,
                 ChatMessage.class,
@@ -119,5 +154,5 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         listOfMsg.setAdapter(adapter);
-    }
+    }*/
 }
