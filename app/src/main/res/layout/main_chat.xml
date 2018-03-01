@@ -4,27 +4,25 @@
     android:id="@+id/mainChat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     tools:context="com.etrausta.driverguide.MainChat"
     tools:ignore="NamespaceTypo">
 
 
-    <android.support.design.widget.TextInputLayout
+    <!--<android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/fab"
         android:layout_alignParentBottom="true">
+
         <EditText
+            android:id="@+id/inputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Message"
-            android:id="@+id/inputEditText"
-            />
+            android:hint="@string/Message" />
 
     </android.support.design.widget.TextInputLayout>
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -36,9 +34,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         app:fabSize="mini"
-        android:focusable="true" />
+        android:focusable="true" />-->
 
-    <ListView
+
+    <!--<ListView
         android:id="@+id/listOfMsg"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -51,5 +50,70 @@
         android:layout_height="match_parent"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
+        />-->
+    <ListView
+        android:id="@+id/listOfMsg"
+        android:paddingTop="10dp"
+        android:paddingBottom="50dp"
+        android:clipToPadding="false"
+        android:background="#f4f6f7"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp"
+            android:background="@drawable/back_addtask"
+            android:layout_toStartOf="@+id/fab"
+            android:layout_centerVertical="true"
+            >
+            <EditText
+                android:id="@+id/inputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#fff"
+                android:hint="Type a Message"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fab"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/back_fab"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"
+            android:elevation="4dp"
+            android:layout_centerInParent="true"
+            >
+            <ImageView
+                android:id="@+id/fab_img"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_mic_white_24dp"
+                android:tint="#fff"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>
