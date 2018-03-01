@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         activityMain = (LinearLayout) findViewById(R.id.activity_main);
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,11 +92,18 @@ public class MainActivity extends AppCompatActivity {
                                 selectedFragment = MainHome.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = MainChat.newInstance();
+                                selectedFragment = MainTrips.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = MainSearch.newInstance();
                                 break;
+                            case R.id.action_item4:
+                                selectedFragment = MainChat.newInstance();
+                                break;
+                            case R.id.action_item5:
+                                selectedFragment = MainAlerts.newInstance();
+                                break;
+
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
