@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "823061955447",
+    "firebase_url": "https://driver-guide-ab4d2.firebaseio.com",
+    "project_id": "driver-guide-ab4d2",
+    "storage_bucket": "driver-guide-ab4d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823061955447:android:689f2a86bcfd4a86",
+        "android_client_info": {
+          "package_name": "com.etrausta.driverguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823061955447-bs7h1j0ccqtu4smbssvvr80rrv4dkoue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.etrausta.driverguide",
+            "certificate_hash": "3a19ed1f0bb926f495dc4939edf33131920dd8a2"
+          }
+        },
+        {
+          "client_id": "823061955447-jlg0ejeps2pvlb4fb8gfk5t8s4skuoal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcbaKjI0ZDlOt9cN1hZ7CKL3TQbhLJbqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823061955447-jlg0ejeps2pvlb4fb8gfk5t8s4skuoal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
