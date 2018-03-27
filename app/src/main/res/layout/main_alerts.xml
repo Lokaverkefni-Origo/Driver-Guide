@@ -12,6 +12,7 @@
     tools:context="com.etrausta.driverguide.MainSearch">
 
     <ImageView
+        android:contentDescription="@string/Alerts"
         android:id="@+id/imageViewSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

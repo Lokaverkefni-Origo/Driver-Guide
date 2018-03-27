@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     tools:context="com.etrausta.driverguide.MainActivity">
 
     <RelativeLayout
@@ -14,6 +15,7 @@
         android:layout_weight=".4">
 
         <ImageView
+            android:contentDescription="@string/Map"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

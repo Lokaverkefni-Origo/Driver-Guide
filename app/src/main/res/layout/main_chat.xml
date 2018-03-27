@@ -58,7 +58,9 @@
         android:clipToPadding="false"
         android:background="#f4f6f7"
         android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stackFromBottom="true"
@@ -75,11 +77,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
-            android:elevation="2dp"
             android:background="@drawable/back_addtask"
             android:layout_toStartOf="@+id/fab"
+            android:layout_toLeftOf="@+id/fab"
             android:layout_centerVertical="true"
             >
             <EditText
@@ -90,7 +94,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="#fff"
-                android:hint="Type a Message"
+                android:hint="@string/TypeAMessage"
                 android:textSize="18sp"/>
         </RelativeLayout>
 
@@ -99,13 +103,15 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:background="@drawable/back_fab"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="5dp"
-            android:elevation="4dp"
+            android:layout_marginRight="5dp"
             android:layout_centerInParent="true"
             >
             <ImageView
+                android:contentDescription="@string/Chat"
                 android:id="@+id/fab_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
