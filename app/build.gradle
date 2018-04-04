@@ -6,7 +6,6 @@ android {
     defaultConfig {
         applicationId "com.etrausta.driverguide"
         minSdkVersion 16
-        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -21,7 +20,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -34,18 +33,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.android.support:design:26.1.0'
-    compile 'com.firebaseui:firebase-ui:0.6.0'
-    compile 'ai.api:sdk:2.0.7@aar'
-    compile 'ai.api:libai:1.6.12'
-
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.firebaseui:firebase-ui:0.6.0'
+    implementation 'ai.api:sdk:2.0.7@aar'
+    implementation 'ai.api:libai:1.6.12'
+    implementation "com.android.support:support-core-utils:26.1.0"
 
     // FirebaseUI for Firebase Auth
-    compile 'com.firebaseui:firebase-ui-auth:3.1.0'
-    compile 'com.google.android.gms:play-services-auth:11.4.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
-
+    implementation 'com.firebaseui:firebase-ui-auth:3.1.0'
+    implementation 'com.google.android.gms:play-services-auth:11.4.2'
+    implementation 'com.google.android.gms:play-services-games:11.4.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 apply plugin: 'com.google.gms.google-services'
