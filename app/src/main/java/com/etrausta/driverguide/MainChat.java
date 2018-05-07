@@ -71,7 +71,7 @@ public class MainChat extends Fragment implements AIListener, OnInitListener {
 
     private FirebaseListAdapter<ChatMessage> adapter;
 
-    private TextToSpeech myTTS;
+    private TextToSpeech TTS;
 
     private int DATA_CHECK_CODE = 0;
 
@@ -256,12 +256,12 @@ public class MainChat extends Fragment implements AIListener, OnInitListener {
         ChatMessage chatMessage = new ChatMessage(reply, "Caren");
         ref.child("chat").push().setValue(chatMessage);
 
-        speakWords(reply);
+        speakUp(reply);
     }
-    private void speakWords(String speech) {
+    private void speakUp(String textSpeech) {
 
         //speak straight away
-        myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+        TTS.speak(textSpeech, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     protected void makeRequest() {
@@ -294,11 +294,11 @@ public class MainChat extends Fragment implements AIListener, OnInitListener {
 
         if (requestCode == DATA_CHECK_CODE) {
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                //the user has the necessary data - create the TTS
-                myTTS = new TextToSpeech(getActivity(), this);
+                //create text to speech
+                TTS = new TextToSpeech(getActivity(), this);
             }
             else {
-                //no data - install it now
+                //install data
                 Intent installTTSIntent = new Intent();
                 installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
                 startActivity(installTTSIntent);
@@ -335,11 +335,11 @@ public class MainChat extends Fragment implements AIListener, OnInitListener {
     @Override
     public void onInit(int initStatus) {
         if (initStatus == TextToSpeech.SUCCESS) {
-            if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
-                myTTS.setLanguage(Locale.US);
+            if(TTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
+                TTS.setLanguage(Locale.US);
         }
         else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(getActivity(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+            Log.i("info", "TTS failed");
         }
     }
 
