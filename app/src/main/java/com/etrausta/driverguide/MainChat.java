@@ -54,7 +54,14 @@ import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
 
-public class MainChat extends Fragment implements AIListener {
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.content.Intent;
+import android.widget.Toast;
+
+import java.util.Locale;
+
+public class MainChat extends Fragment implements AIListener, OnInitListener {
     RelativeLayout fab;
     ListView listOfMsg;
     EditText inputEditText;
@@ -63,6 +70,10 @@ public class MainChat extends Fragment implements AIListener {
     Boolean flagForImage = true;
 
     private FirebaseListAdapter<ChatMessage> adapter;
+
+    private TextToSpeech myTTS;
+
+    private int DATA_CHECK_CODE = 0;
 
     public static MainChat newInstance() {
         MainChat fragment = new MainChat();
@@ -110,17 +121,14 @@ public class MainChat extends Fragment implements AIListener {
             @SuppressLint("StaticFieldLeak")
             @Override
             public void onClick(View view) {
-
                 final String message = inputEditText.getText().toString().trim();
-
                 if (!message.equals("")) {
 
                     ChatMessage chatMessage = new ChatMessage(message, FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
                     ref.child("chat").push().setValue(chatMessage);
-
                     aiRequest.setQuery(message);
                     new AsyncTask<AIRequest, Void, AIResponse>() {
+
                         @Override
                         protected AIResponse doInBackground(AIRequest... aiRequests) {
                             final AIRequest request = aiRequests[0];
@@ -140,19 +148,24 @@ public class MainChat extends Fragment implements AIListener {
                                 String reply = result.getFulfillment().getSpeech();
                                 ChatMessage chatMessage = new ChatMessage(reply, "Caren");
                                 ref.child("chat").push().setValue(chatMessage);
+
                             }
                         }
+
                     }.execute(aiRequest);
                 }
                 else {
-                    aiService.startListening(); 
+                    aiService.startListening();
                 }
-
                 inputEditText.setText("");
-;
+
+                Intent checkTTSIntent = new Intent();
+                checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+                startActivityForResult(checkTTSIntent, DATA_CHECK_CODE);
                 //remove keyboard after clicking send
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
             }
         });
 
@@ -177,13 +190,11 @@ public class MainChat extends Fragment implements AIListener {
                     flagForImage = true;
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
         });
-
         displayChatMessage(view);
         adapter.notifyDataSetChanged();
     }
@@ -240,9 +251,17 @@ public class MainChat extends Fragment implements AIListener {
         ChatMessage chatMessage0 = new ChatMessage(message, FirebaseAuth.getInstance().getCurrentUser().getEmail());
         ref.child("chat").push().setValue(chatMessage0);
 
+
         String reply = result.getFulfillment().getSpeech();
         ChatMessage chatMessage = new ChatMessage(reply, "Caren");
         ref.child("chat").push().setValue(chatMessage);
+
+        speakWords(reply);
+    }
+    private void speakWords(String speech) {
+
+        //speak straight away
+        myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     protected void makeRequest() {
@@ -271,6 +290,23 @@ public class MainChat extends Fragment implements AIListener {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                //the user has the necessary data - create the TTS
+                myTTS = new TextToSpeech(getActivity(), this);
+            }
+            else {
+                //no data - install it now
+                Intent installTTSIntent = new Intent();
+                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installTTSIntent);
+            }
+        }
+    }
+
+    @Override
     public void onError(AIError error) {
 
     }
@@ -294,4 +330,18 @@ public class MainChat extends Fragment implements AIListener {
     public void onListeningFinished() {
 
     }
+
+
+    @Override
+    public void onInit(int initStatus) {
+        if (initStatus == TextToSpeech.SUCCESS) {
+            if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
+                myTTS.setLanguage(Locale.US);
+        }
+        else if (initStatus == TextToSpeech.ERROR) {
+            Toast.makeText(getActivity(), "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 }
