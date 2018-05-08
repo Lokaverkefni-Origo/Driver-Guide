@@ -26,7 +26,4 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/Alerts"
         app:showAsAction="ifRoom|withText"/>
-
-
-
 </menu>
