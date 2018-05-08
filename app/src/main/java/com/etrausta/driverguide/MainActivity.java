@@ -32,10 +32,10 @@ import android.support.v4.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     private static int SIGN_IN_REQUEST_CODE = 1;
-    private FirebaseListAdapter<ChatMessage> adapter;
     LinearLayout activityMain;
     FloatingActionButton fab;
 
+    //Skrá sig út
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menuSignOut) {
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
         return true;
     }
 
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Athugar hvort innskráning hafi virkað
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -76,12 +76,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Kallar í main útlitið
         activityMain = (LinearLayout) findViewById(R.id.activity_main);
+        //Býr til navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-
+        //Skiptir á milli útlita þegar valið er í navigation barnum
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -103,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.action_item5:
                                 selectedFragment = MainAlerts.newInstance();
                                 break;
-
                         }
+
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();
@@ -112,55 +113,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        //Manually displaying the first fragment - one time only
+        //Birtir sjálfkrafa fyrsta gluggann (mainhome)
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, MainHome.newInstance());
         transaction.commit();
-        /*fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText inputEditText = (EditText) findViewById(R.id.inputEditText);
-                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(inputEditText.getText().toString(),
-                        FirebaseAuth.getInstance().getCurrentUser().getEmail()));
-                inputEditText.setText("");
-                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage("þetta er dummy",
-                        "Api Jónsson"));
-            }
-        });*/
 
-        //check if not sign in then navigate signing page
+        //Athugar ef ekki er búið að skrá sig inn, þá fer þetta yfir á innskráningarsíðuna
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),SIGN_IN_REQUEST_CODE);
         }
+        //popup sem kemur ef ert skráður inn.
         else {
             Snackbar.make(activityMain,"Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(),Snackbar.LENGTH_SHORT).show();
-            //load content
-            /*displayChatMessage();
-            adapter.notifyDataSetChanged();*/
         }
 
     }
-
-    /*public void displayChatMessage() {
-        ListView listOfMsg = (ListView) findViewById(R.id.listOfMsg);
-        adapter = new FirebaseListAdapter<ChatMessage>(this,
-                ChatMessage.class,
-                R.layout.list_item,
-                FirebaseDatabase.getInstance().getReference()) {
-            @Override
-            protected void populateView(View v, ChatMessage model, int position) {
-                //get references to the views of list_item.xml
-                TextView messageTxt = (TextView)v.findViewById(R.id.msgTxt);
-                TextView messageUser = (TextView)v.findViewById(R.id.msgUser);
-                TextView messageTime = (TextView)v.findViewById(R.id.msgTime);
-
-                messageTxt.setText(model.getMsgTxt());
-                messageUser.setText(model.getMsgUser());
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMsgTime()));
-            }
-        };
-        listOfMsg.setAdapter(adapter);
-    }*/
 }

@@ -8,8 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:id="@+id/msgUser"
-        android:textStyle="normal|bold"
-         />
+        android:textStyle="normal|bold" />
 
     <TextView
         android:id="@+id/msgTime"
