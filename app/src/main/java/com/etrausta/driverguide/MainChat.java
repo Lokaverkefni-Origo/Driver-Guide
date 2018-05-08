@@ -248,6 +248,7 @@ public class MainChat extends Fragment implements AIListener, OnInitListener {
 
         speakUp(reply);
     }
+
     private void speakUp(String speech) {
         tts.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
     }
