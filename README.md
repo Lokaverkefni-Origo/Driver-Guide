@@ -10,9 +10,6 @@ Til þess að setja upp forritið á nýrri vél eða hjá nýjum notenda, þá 
 
 Til þess að þjálfa “chatbot” (Caren) þá þarf notandi að hafa samband við admin á verkefninu svo að hann geti gefið notandanum aðgang að Dialogflow, þar sem Caren er þjálfuð og búin til. Ef notandi þekkir ekki hvernig eigi að þjálfa eða búa til “chatbot” þá verður notandi að kynna sér fyrst leiðbeiningar af Dialogflow ( https://dialogflow.com/docs/getting-started/basics ) sem Google gefur út.
 
-## Þjónustur
-
-Þjónustur sem eru notaðar í þessu verkefni eru eftirfarandi:
 
 ## Þjónustur
 
